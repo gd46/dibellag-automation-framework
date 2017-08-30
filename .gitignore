@@ -1,3 +1,4 @@
 node_modules
 .will-be-removed-after-cucumber-runs.tmp
 test/output/**
+jsconfig.json
