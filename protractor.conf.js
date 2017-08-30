@@ -4,7 +4,7 @@ exports.config = {
   frameworkPath: require.resolve('protractor-cucumber-framework'),
 
   specs: [
-    'test/feature/**/*.feature'
+    'test/features/**/*.feature'
   ],
 
   capabilities: {
@@ -19,8 +19,10 @@ exports.config = {
 
   cucumberOpts: {
     timeout: 30000,
+    format: 'json:test/output/results.json',
+    snippetInterface: 'promise',
     require: [
-      'test/feature/steps/**/*.steps.js'
+      'test/features/steps/**/*.steps.js'
     ]
   },
   allScriptsTimeout: 30000
