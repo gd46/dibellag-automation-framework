@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "protractor protractor.conf.js",
-    "pretest": "webdriver-manager update && rm -rf test/output && mkdir test/output"
+    "test": "npm run cleanup && npm run setup && protractor protractor.conf.js",
+    "test-fast": "protractor protractor.conf.js",
+    "pretest": "webdriver-manager update",
+    "cleanup": "rm -rf test/output",
+    "setup": "mkdir test/output"
   },
   "author": "Giuseppe DiBella",
   "license": "ISC",
