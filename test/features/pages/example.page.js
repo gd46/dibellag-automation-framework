@@ -1,5 +1,5 @@
-function ExamplePage() {
-  headerLogo = $('.header-logo-invertocat');
+function Example() {
+  this.headerLogo = $('.header-logo-invertocat');
 }
 
-module.exports.ExamplePage = ExamplePage;
+module.exports = Example;

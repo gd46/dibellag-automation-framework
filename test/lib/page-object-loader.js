@@ -1,28 +1,53 @@
-function PageObjectsLoader() {
+// function PageObjectsLoader() {
   
-  let fs = require('fs');
-  let _ = require('lodash');
-  let pathToPages = 'test/features/pages';
+//   let glob = require("glob");
+//   let _ = require('lodash');
 
-  fs.readdir(pathToPages, (err, files) => {
-    if( err ) {
-      console.error( "Could not list the directory.", err );
-      process.exit( 1 );
-    } 
-    files.forEach((file, index) => {
-      let fileNameWithoutExtension = file.replace('.js', '');
-      let splitFileNameOnDot = fileNameWithoutExtension.split('.');
-      let pageName = '';
-      let pages = {};
-      splitFileNameOnDot.forEach((filePieces) => {
-        pageName += _.capitalize(filePieces);
-        pages = `${pageName}: require('${pathToPages}/${fileNameWithoutExtension}')`;
-      });
-      console.log('pages', pages);
-      console.log('pageName', pageName);
-      console.log('fileNameWithoutExtension', fileNameWithoutExtension);
-      console.log('splitFileNameOnDot', splitFileNameOnDot);
-    });
+//   glob("**/*.page.js", {
+//     nonull: true
+//   }, (er, filePaths) => {
+//     let pages = {};
+//     filePaths.forEach((filePath) => {
+//       let fileName = filePath.split(/(\\|\/)/g).pop(); // extract file name with extension
+//       let pageName = _.camelCase(fileName.split('.', 1)[0]); // create the file name pieces and take the first which is the name and format it
+//       let pageObjectName = pageName.charAt(0).toUpperCase() + pageName.slice(1); // make the file name match the name of the page object function or class
+//       pages[pageObjectName] = require(`./${filePath}`);
+//     });
+//     console.log('pages', pages);
+//     return pages;
+//   });
+// }
+// module.exports = PageObjectsLoader;
+
+// let glob = require("glob");
+// let _ = require('lodash');
+// let pages = {};
+//   glob("**/*.page.js", {
+//     nonull: true
+//   }, (er, filePaths) => {
+//     filePaths.forEach((filePath) => {
+//       let fileName = filePath.split(/(\\|\/)/g).pop(); // extract file name with extension
+//       let pageName = _.camelCase(fileName.split('.', 1)[0]); // create the file name pieces and take the first which is the name and format it
+//       let pageObjectName = pageName.charAt(0).toUpperCase() + pageName.slice(1); // make the file name match the name of the page object function or class
+//       pages[pageObjectName] = require(`../../${filePath}`);
+//     });
+//     console.log('pages', pages);
+//   });
+
+let glob = require("glob");
+let _ = require('lodash');
+let pages = {};
+
+  let filePaths = glob.sync("**/*.page.js", {
+    nonull: true
   });
-}
-module.exports.PageObjectsLoader = PageObjectsLoader;
+
+  filePaths.forEach((filePath) => {
+      let fileName = filePath.split(/(\\|\/)/g).pop(); // extract file name with extension
+      let pageName = _.camelCase(fileName.split('.', 1)[0]); // create the file name pieces and take the first which is the name and format it
+      let pageObjectName = pageName.charAt(0).toUpperCase() + pageName.slice(1); // make the file name match the name of the page object function or class
+      pages[pageObjectName] = require(`../../${filePath}`);
+    });
+    console.log('pages', pages);
+
+module.exports = pages;
