@@ -13,9 +13,9 @@ exports.config = {
 
   directConnect: true,
 
-  onPrepare: function () {
-    browser.waitForAngularEnabled(false);
-  },
+  plugins: [{
+    path: './test/features/plugins/setup.js'
+  }],
 
   cucumberOpts: {
     timeout: 30000,
