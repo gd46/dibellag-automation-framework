@@ -1,8 +1,4 @@
 let {defineSupportCode} = require('cucumber');
-let chai = require('chai')
-let chaiAsPromised = require('chai-as-promised');
-let expect = chai.expect;
-chai.use(chaiAsPromised);
 
 defineSupportCode(function({Then, When, setDefaultTimeout}) {
 
@@ -15,6 +11,6 @@ defineSupportCode(function({Then, When, setDefaultTimeout}) {
   });
 
   When(/^I should see a header logo$/, function () {
-    return expect(examplePage.headerLogo.isDisplayed()).to.eventually.equal(true);
+    return this.expect(examplePage.headerLogo.isDisplayed()).to.eventually.equal(true);
   });
 });
