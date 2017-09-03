@@ -19,7 +19,7 @@ exports.config = {
 
   cucumberOpts: {
     timeout: 30000,
-    format: 'json:test/output/results.json',
+    format: `json:test/output/results.json`,
     snippetInterface: 'promise',
     require: [
       'test/features/steps/**/*.steps.js'

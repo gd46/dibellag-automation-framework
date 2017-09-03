@@ -8,7 +8,9 @@
     "test-fast": "protractor protractor.conf.js",
     "pretest": "webdriver-manager update",
     "cleanup": "rm -rf test/output",
-    "setup": "mkdir test/output"
+    "setup": "mkdir test/output",
+    "report": "node ./test/lib/reporter.config.js",
+    "test-local": "npm test && npm run report"
   },
   "author": "Giuseppe DiBella",
   "license": "ISC",
@@ -20,6 +22,7 @@
     "glob": "^7.1.2",
     "lodash": "^4.17.4",
     "protractor": "^5.1.2",
-    "protractor-cucumber-framework": "^4.0.3"
+    "protractor-cucumber-framework": "^4.0.3",
+    "cucumber-html-reporter": "^3.0.1"
   }
 }
