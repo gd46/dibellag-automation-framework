@@ -1,5 +1,8 @@
 Feature: example
 
-  Scenario: Example Github Scenario
-    When I go to github
-    Then I should see a header logo
+  Scenario: Github test with page object
+  	When I go to github
+  	Then I should see a header logo
+
+  Scenario: Custom Transform
+  	Given I have 42 cucumbers in my belly

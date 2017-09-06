@@ -1,6 +1,6 @@
 let {defineSupportCode} = require('cucumber');
 
-defineSupportCode(function({Then, When, setDefaultTimeout}) {
+defineSupportCode(function({Given, When, Then, setDefaultTimeout}) {
 
   // setDefaultTimeout(60 * 1000);
 
@@ -12,5 +12,10 @@ defineSupportCode(function({Then, When, setDefaultTimeout}) {
 
   When(/^I should see a header logo$/, function () {
     return this.expect(examplePage.headerLogo.isDisplayed()).to.eventually.equal(true);
+  });
+
+  Given('I have {int} cucumbers in my {belly}', function(int, belly) {
+  	this.expect(belly).to.equal('BELLY');
+    return this.expect(int).to.equal(42);
   });
 });

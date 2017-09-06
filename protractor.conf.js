@@ -22,6 +22,7 @@ exports.config = {
     format: `json:test/output/results.json`,
     snippetInterface: 'promise',
     require: [
+      // 'test/features/support/**/*.js',
       'test/features/steps/**/*.steps.js'
     ]
   },
