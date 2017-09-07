@@ -17,8 +17,8 @@ defineSupportCode(function({After}) {
     // return this.attach(new Buffer.from(JSON.stringify(json)), 'application/json');
    
     // Attaching screenshot
-    // return browser.takeScreenshot().then((png) => {
-    //     this.attach(new Buffer(png, 'base64'), 'image/png');
-    // });
+    return browser.takeScreenshot().then((png) => {
+        this.attach(new Buffer(png, 'base64'), 'image/png');
+    });
   });
 });
