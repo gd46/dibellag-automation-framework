@@ -2,8 +2,6 @@ let {defineSupportCode} = require('cucumber');
 
 defineSupportCode(function({Given, When, Then, setDefaultTimeout}) {
 
-  // setDefaultTimeout(60 * 1000);
-
   let examplePage = new browser.pages.Example();
 
   When(/^I go to github$/, function () {
