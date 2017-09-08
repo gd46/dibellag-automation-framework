@@ -1,11 +1,11 @@
-var {defineSupportCode} = require('cucumber');
+let {defineSupportCode} = require('cucumber');
 
 
 function CustomWorld({attach, parameters}) {
 	
 	// Apply default world functionality
 	this.attach = attach
-  	this.parameters = parameters
+  this.parameters = parameters
 	
 	let chai = require('chai')
 	let chaiAsPromised = require('chai-as-promised');
