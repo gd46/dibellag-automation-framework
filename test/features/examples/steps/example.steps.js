@@ -17,6 +17,6 @@ defineSupportCode(function({Given, When, Then, setDefaultTimeout}) {
   });
 
   Given('I have {int} cucumbers', function (int) {
-    return this.expect(int).to.equal(44);
+    return this.expect(int).to.equal(42);
   });
 });
