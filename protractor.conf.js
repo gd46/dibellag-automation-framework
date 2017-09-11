@@ -26,5 +26,6 @@ exports.config = {
       'test/features/steps/**/*.steps.js'
     ]
   },
-  allScriptsTimeout: 30000
+  allScriptsTimeout: 30000,
+  disableChecks: true
 };

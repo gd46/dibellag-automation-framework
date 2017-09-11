@@ -12,8 +12,11 @@ defineSupportCode(function({Given, When, Then, setDefaultTimeout}) {
     return this.expect(examplePage.headerLogo.isDisplayed()).to.eventually.equal(true);
   });
 
-  Given('I have {int} cucumbers in my {belly}', function(int, belly) {
-  	this.expect(belly).to.equal('BELLY');
-    return this.expect(int).to.equal(42);
+  Given('I have cucumbers in my {belly}', function(belly) {
+  	return this.expect(belly).to.equal('BELLY');
+  });
+
+  Given('I have {int} cucumbers', function (int) {
+    return this.expect(int).to.equal(44);
   });
 });
