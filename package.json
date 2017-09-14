@@ -1,8 +1,8 @@
 {
   "name": "dibellag-automation-framework",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Protractor Cucumber framework using latest package versions",
+  "main": "protractor.conf.js",
   "scripts": {
     "pretest": "webdriver-manager update && npm run lint",
     "test": "npm run report:cleanup && npm run report:setup && protractor protractor.conf.js",
@@ -33,8 +33,5 @@
     "lodash": "^4.17.4",
     "protractor": "^5.1.2",
     "protractor-cucumber-framework": "^4.0.3"
-  },
-  "devDependencies": {
-    "eslint-config-google": "^0.9.1"
   }
 }
