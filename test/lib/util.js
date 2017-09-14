@@ -7,11 +7,11 @@ module.exports = {
     }, el.getWebElement()));
   },
   writeScreenShot: (attach) => {
-   	return browser.takeScreenshot().then((png) => {
+    return browser.takeScreenshot().then((png) => {
         attach(new Buffer(png, 'base64'), 'image/png');
     });
    },
   writeJsonObject: (attach, json) => {
-  	return attach(new Buffer.from(JSON.stringify(json)), 'application/json');
-  } 
-}
+    return attach(new Buffer.from(JSON.stringify(json)), 'application/json');
+  }
+};

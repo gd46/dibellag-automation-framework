@@ -11,21 +11,30 @@
     "setup": "mkdir test/output",
     "report": "node ./test/lib/reporter.config.js",
     "test-local": "npm test && npm run report",
-    "lint": "gherkin-lint"
+    "lint": "npm run lint:gherkin && npm run lint:es",
+    "lint:fix": "eslint test/** --fix",
+    "lint:gherkin": "gherkin-lint",
+    "lint:es": "eslint test/**"
   },
   "author": "Giuseppe DiBella",
   "license": "ISC",
   "dependencies": {
+    "babel-eslint": "^8.0.0",
     "bluebird": "^3.5.0",
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "chance": "^1.0.10",
     "cucumber": "^3.0.1",
     "cucumber-html-reporter": "^3.0.1",
+    "eslint": "^4.6.1",
+    "eslint-plugin-protractor": "^1.40.0",
     "gherkin-lint": "^2.5.0",
     "glob": "^7.1.2",
     "lodash": "^4.17.4",
     "protractor": "^5.1.2",
     "protractor-cucumber-framework": "^4.0.3"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1"
   }
 }

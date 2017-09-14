@@ -4,4 +4,4 @@ module.exports = {
 		let pages = require('../../lib/page-object-loader');
 		browser.pages = pages;
 	}
-}
+};

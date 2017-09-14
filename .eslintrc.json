@@ -1,0 +1,42 @@
+{
+		"parser": "babel-eslint",
+		"parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "extends": [
+    	"eslint:recommended"
+    ],
+    "plugins": [
+    	"protractor"
+    ],
+    "rules": {
+    	"no-undef": ["off", "always"],
+    	"semi": ["error", "always"],
+      "quotes": ["error", "single"],
+      "object-curly-spacing": ["error", "always"],
+      "space-before-function-paren": ["error", "always"],
+      "comma-dangle": ["error", "never"],
+      "key-spacing": ["error", {
+			    "align": {
+			        "beforeColon": true,
+			        "afterColon": true,
+			        "on": "colon"
+			    }
+			}],
+			"max-len": ["error", 80],
+			"no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+			"require-jsdoc": ["error", {
+			    "require": {
+			        "FunctionDeclaration": true,
+			        "MethodDefinition": true,
+			        "ClassDeclaration": true
+			    }
+			}]
+    }
+}
