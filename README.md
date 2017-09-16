@@ -75,6 +75,37 @@ Investigating why it throws error when there isnt a case for it.
 "no-repetitive-locators": 2,
 "correct-chaining": 2
 
+## How to use protractor's elementExplorer
+
+1. Run the below command in one terminal tab
+```
+npm run webdriver-manager:setup
+```
+This will update webdriver-manager and start it
+
+2. Run the below command in a second terminal tab
+```
+npm run test:elementExplorer
+``` 
+3. Testing selectors
+```
+You can now navigate to any url and run protractor 
+commands to test your selectors and functions.
+```
+
+## TODOs
+
+1. Mock setup
+2. Protractor lint
+3. Travis ci/headless chrome cucumber tests
+4. package page object loader
+5. Fuctions for executing requests
+6. Custom reporter
+7. Parallel testing
+8. Add more test examples
+9. Semantic commits / changelog
+10. Cross browser support
+
 ## FAQ
 
 ### The world instance isn't available in my hooks or step definitions.
