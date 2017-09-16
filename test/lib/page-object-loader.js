@@ -8,8 +8,8 @@ let pages = {};
   });
 
   filePaths.forEach((filePath) => {
-      // extract file name with extension
-      let fileName = filePath.split(/(\\|\/)/g).pop();
+      // extract file name without the extension
+      let fileName =  path.basename(filePath, '.js');
       /*
         create the file name pieces and take the first 
         which is the name and format it
