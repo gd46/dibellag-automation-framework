@@ -29,14 +29,15 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "chance": "^1.0.10",
-    "cucumber": "^3.0.1",
+    "cucumber": "^3.0.2",
     "cucumber-html-reporter": "^3.0.1",
-    "eslint": "^4.6.1",
+    "eslint": "^4.7.0",
     "eslint-plugin-protractor": "^1.40.0",
-    "gherkin-lint": "^2.5.0",
+    "gherkin-lint": "^2.5.1",
     "glob": "^7.1.2",
     "lodash": "^4.17.4",
+    "page-object-loader": "^1.0.1",
     "protractor": "^5.1.2",
-    "protractor-cucumber-framework": "^4.0.3"
+    "protractor-cucumber-framework": "^4.0.8"
   }
 }
