@@ -98,13 +98,12 @@ commands to test your selectors and functions.
 1. Mock setup
 2. Protractor lint
 3. Travis ci/headless chrome cucumber tests
-4. package page object loader
-5. Fuctions for executing requests
-6. Custom reporter
-7. Parallel testing
-8. Add more test examples
-9. Semantic commits / changelog
-10. Cross browser support
+4. Fuctions for executing requests
+5. Custom reporter
+6. Parallel testing
+7. Add more test examples
+8. Semantic commits / changelog
+9. Cross browser support
 
 ## FAQ
 
