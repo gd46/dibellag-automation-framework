@@ -44,36 +44,14 @@ The following lint tasks are available:
 These are the protractor lint rules that will be turned on.
 Investigating why it throws error when there isnt a case for it.
 
-"plugin:protractor/recommended"
+TODO: Try adding back: "plugin:protractor/recommended" in the extends, and find out why each rule needs protractor/ in front of it to work. 
+
+Settings for protractor rules: 
+```
 2 - error
 1 - warning
 0 - off
-"no-browser-sleep": 2,
-"no-browser-pause": 2,
-"missing-wait-message": 2,
-"no-by-xpath": 2,
-"no-browser-driver": 2,
-"by-css-shortcut": 2,
-"no-execute-script": 2,
-"use-first-last": 2,
-"no-invalid-selectors": 2,
-"no-array-finder-methods": 2,
-"valid-locator-type": 2,
-"no-compound-classes": 2,
-"no-get-inner-outer-html": 2,
-"no-angular-classes": 2,
-"no-angular-attributes": 2,
-"no-bootstrap-classes": 2,
-"array-callback-return": 2,
-"use-promise-all": 2,
-"bare-element-finders": 2,
-"limit-selector-depth": 2,
-"valid-by-tagname": 2,
-"valid-by-id": 2,
-"use-count-method": 2,
-"no-repetitive-selectors": 2,
-"no-repetitive-locators": 2,
-"correct-chaining": 2
+```
 
 ## How to use protractor's elementExplorer
 
@@ -96,14 +74,13 @@ commands to test your selectors and functions.
 ## TODOs
 
 1. Mock setup
-2. Protractor lint
-3. Travis ci/headless chrome cucumber tests
-4. Fuctions for executing requests
-5. Custom reporter
-6. Parallel testing
-7. Add more test examples
-8. Semantic commits / changelog
-9. Cross browser support
+2. Travis ci/headless chrome cucumber tests
+3. Fuctions for executing requests
+4. Custom reporter
+5. Parallel testing
+6. Add more test examples
+7. Semantic commits / changelog
+8. Cross browser support
 
 ## FAQ
 
