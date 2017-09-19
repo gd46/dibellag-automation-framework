@@ -9,7 +9,7 @@
     "test:fast": "protractor protractor.conf.js",
     "test:local": "npm test && npm run report:generate",
     "test:elementExplorer": "protractor protractor.conf.js --seleniumAddress=http://127.0.0.1:4444/wd/hub --elementExplorer",
-    "test:el": "webdriver-manager start & sleep 5 && ttab",
+    "test:dry-run": "protractor protractor.conf.js --cucumberOpts.dry-run",
     "report:cleanup": "rm -rf test/output",
     "report:setup": "mkdir test/output",
     "report:generate": "node ./test/lib/reporter.config.js",
