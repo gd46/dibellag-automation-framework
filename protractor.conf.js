@@ -1,3 +1,4 @@
+let timestamp = Date.now();
 exports.config = {
   framework: 'custom',
 
@@ -19,10 +20,9 @@ exports.config = {
 
   cucumberOpts: {
     timeout: 30000,
-    format: `json:test/output/results.json`,
+    format: `json:test/output/results-${timestamp}.json`,
     snippetInterface: 'promise',
     require: [
-      // 'test/features/support/**/*.js',
       'test/features/steps/**/*.steps.js'
     ]
   },

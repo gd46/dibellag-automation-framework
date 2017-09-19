@@ -35,7 +35,7 @@ along with gherkin and protractor lint rules.
 The following lint tasks are available:
 
 ```json
-"lint": "npm run lint:gherkin && npm run lint:es",
+"lint": "(npm run lint:gherkin; npm run lint:es)",
 "lint:fix": "eslint test/** --fix",
 "lint:gherkin": "gherkin-lint",
 "lint:es": "eslint test/**"
@@ -69,6 +69,24 @@ npm run test:elementExplorer
 ```
 You can now navigate to any url and run protractor 
 commands to test your selectors and functions.
+```
+
+## Bash cli differences
+
+1. How to run a task one after the other regardless if the first one passes
+```
+(npm run lint:gherkin; npm run lint:es)
+```
+
+2. How to run tasks synchronously
+```
+(npm run test:fast -- --cucumberOpts.tags @example && 
+npm run test:fast -- --cucumberOpts.tags @example2)
+```
+
+3. How to run tasks in parallel
+```
+Coming Soon...
 ```
 
 ## TODOs
