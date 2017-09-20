@@ -75,18 +75,27 @@ commands to test your selectors and functions.
 
 1. How to run a task one after the other regardless if the first one passes
 ```
-(npm run lint:gherkin; npm run lint:es)
+npm run test:scripts:ignore-failure
 ```
 
 2. How to run tasks synchronously
 ```
-(npm run test:fast -- --cucumberOpts.tags @example && 
-npm run test:fast -- --cucumberOpts.tags @example2)
+npm run test:scripts:synchronous
 ```
 
 3. How to run tasks in parallel
 ```
-Coming Soon...
+npm run test:scripts:parallel
+```
+See example of parallel execution in ./test/scripts/parallel.sh
+
+## Add a script to the scripts directory
+
+After adding a script to the scripts directory you needs to run
+the following command to make it executable:
+
+```
+chmod +x fileName
 ```
 
 ## TODOs
