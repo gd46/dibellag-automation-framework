@@ -5,16 +5,15 @@
   "main": "protractor.conf.js",
   "scripts": {
     "pretest": "webdriver-manager update && npm run lint",
-    "test": "npm run report:cleanup && npm run report:setup && protractor protractor.conf.js",
-    "test:fast": "protractor protractor.conf.js",
+    "test": "npm run report:cleanup && protractor protractor.conf.js",
+    "test:ci": "protractor protractor.conf.js",
     "test:local": "(npm test; npm run report:generate)",
     "test:elementExplorer": "protractor protractor.conf.js --seleniumAddress=http://127.0.0.1:4444/wd/hub --elementExplorer",
     "test:dry-run": "protractor protractor.conf.js --cucumberOpts.dry-run",
     "test:scripts:parallel": "./test/scripts/parallel.sh",
     "test:scripts:synchronous": "./test/scripts/synchronous.sh",
     "test:scripts:ignore-failure": "./test/scripts/ignore-failure.sh",
-    "report:cleanup": "rm -rf test/output",
-    "report:setup": "mkdir test/output",
+    "report:cleanup": "rm -rf test/output && mkdir test/output",
     "report:generate": "node ./test/lib/reporter.config.js",
     "lint": "(npm run lint:gherkin; npm run lint:es)",
     "webdriver-manager:update": "webdriver-manager update",
@@ -41,7 +40,6 @@
     "lodash": "^4.17.4",
     "page-object-loader": "^1.0.1",
     "protractor": "^5.1.2",
-    "protractor-cucumber-framework": "^4.0.8",
-    "shelljs": "^0.7.8"
+    "protractor-cucumber-framework": "^4.0.8"
   }
 }
