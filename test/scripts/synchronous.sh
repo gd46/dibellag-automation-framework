@@ -2,5 +2,5 @@
 
 echo 'Synchronous Testing';
 
-(npm run test:fast -- --cucumberOpts.tags @example && 
-npm run test:fast -- --cucumberOpts.tags @example2)
+(npm run test:ci -- --cucumberOpts.tags @example && 
+npm run test:ci -- --cucumberOpts.tags @example2)
