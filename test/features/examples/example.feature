@@ -1,6 +1,6 @@
 Feature: example
 
-  @example
+  @test
   Scenario: Custom Transform should take belly and capitalize it
   	Given I have cucumbers in my belly
 
