@@ -98,19 +98,33 @@ the following command to make it executable:
 chmod +x fileName
 ```
 
+## Running tests in parallel
+
+Try out the parallel example
+
+```
+npm run test:shard
+```
+
+The above default example will run each feature file with a new browser. 
+
+In order to run multiple features in parallel
+
+```
+npm run test:shard -- --maxSessions 2
+```
+
+Pass the maxSessions flag with the number of feature you want to run in parallel. 
+
 ## TODOs
 
 1. Mock setup
 2. Travis ci/headless chrome cucumber tests
 3. Fuctions for executing requests
 4. Custom reporter
-5. Parallel testing
-	5.1 shardTestFiles: true adds PID to results file name
-	5.2 if a task returns no results a json file is created with [] which is invalid and doesnt allow to give report on other scenarios
-	5.3 restartBrowserBetweenTests seems to partially work, meaning soon as it hits github example scenarios it fails waiting for angular even though browser.waitForAngularEnabled(false) is being set.
-6. Add more test examples
-7. Semantic commits / changelog
-8. Cross browser support
+5. Add more test examples
+6. Semantic commits / changelog
+7. Cross browser support
 
 ## FAQ
 
