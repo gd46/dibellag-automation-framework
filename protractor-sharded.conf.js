@@ -1,22 +1,27 @@
-const SHARD_COUNT = exports.SHARD_COUNT = +(process.env.PROTRACTOR_SHARD_COUNT || 4);
-
 const _ = require('lodash');
 const glob = require('glob');
 const fs = require('fs');
+const argv = require('yargs').argv
 
 exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), function (config) {
   // TODO add ability to set maxSessions
   config.maxSessions = 3;
   config.getMultiCapabilities = function () {
-    let files = getSpecFiles();
-    let filesWithTags = getSpecsWithTags(config);
-    console.log('filesWithTags', filesWithTags);
+    let files;
+    let hasTags = hasCucumberTags(config);
+
+    if(hasTags) {
+      files = getSpecsWithTags(config);
+    } else {
+      files = getSpecFiles();
+    }
+    
     return _.map(files, function (file, i) {
       return {
           browserName: 'chrome',
           specs: file,
           shardTestFiles: true,
-          maxInstances: 2 // TODO add ability to set maxInstances 
+          maxInstances: 4 // TODO add dynamic way of setting maxInstances
         }
     });
   }
@@ -29,34 +34,23 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
   }
 
   function getSpecsWithTags(config) {
-    let fs = require('fs');
-    let files = glob.sync('test/features/**/*.feature');
-    let tags = getCucumberTags(config);
-    let taggedFiles = [];
-    _.forEach(files, function (file, i) {
-      // let readStream = fs.createReadStream(file, 'utf8');
-
-      // readStream.on('data', function (chunk) {
-        // if(chunk.indexOf('@test') > -1) {
-        //   taggedFiles.push(file);
-        //   console.log('has example tag');
-        // }
-      // }).on('end', function () {
-      //   console.log('finished reading files');
-      // });
-      let fileContents = fs.readFileSync(file, 'utf8');
-      console.log('tags', tags);
-      _.forEach(tags, function (tag) {
-        if(fileContents.indexOf(tag) > -1) {
-          taggedFiles.push(file);
-          console.log('has example tag');
+    let cliTags = getCucumberCliTags(config);
+    return _.flatten(_.map(glob.sync('test/features/**/*.feature'), function (file) {
+      return _.reduce(fs.readFileSync(file, 'utf8').split('\n'), function (memo, line, i) {
+        if(line.match(/@/)) {
+          let tags = line.split(/(?=@)/g);
+          _.forEach(tags, function (tag) {
+            if(cliTags.includes(tag)) {
+              memo.push(file);
+            }
+          });
         }
-      });
-    });
-    return _.sortedUniq(taggedFiles);
+        return _.sortedUniq(memo);
+      }, []);
+    }));
   }
 
-  function getCucumberTags(config) {
+  function getCucumberCliTags(config) {
     let tags = config.cucumberOpts.tags || process.cucumberOpts.tags;
 
     let tagArray = tags.split(' ');
@@ -68,4 +62,14 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
     });
     return finalTags;
   };
+
+  function hasCucumberTags(config) {
+    let hasTags = false;
+    if(argv.cucumberOpts) {
+      hasTags = !_.isUndefined(argv.cucumberOpts.tags);
+    } else {
+      hasTags = !_.isUndefined(config.cucumberOpts.tags);
+    }
+    return hasTags;
+   };
 });

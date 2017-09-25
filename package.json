@@ -41,6 +41,7 @@
     "lodash": "^4.17.4",
     "page-object-loader": "^1.0.1",
     "protractor": "^5.1.2",
-    "protractor-cucumber-framework": "^4.0.8"
+    "protractor-cucumber-framework": "^4.0.8",
+    "yargs": "^9.0.1"
   }
 }
