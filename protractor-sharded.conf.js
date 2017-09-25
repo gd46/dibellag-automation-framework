@@ -15,13 +15,14 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
     } else {
       files = getSpecFiles();
     }
+    console.log('files', files);
     
     return _.map(files, function (file, i) {
       return {
           browserName: 'chrome',
           specs: file,
           shardTestFiles: true,
-          maxInstances: 4 // TODO add dynamic way of setting maxInstances
+          maxInstances: 2 // TODO add dynamic way of setting maxInstances
         }
     });
   }

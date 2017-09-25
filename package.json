@@ -42,6 +42,7 @@
     "page-object-loader": "^1.0.1",
     "protractor": "^5.1.2",
     "protractor-cucumber-framework": "^4.0.8",
+    "shelljs": "^0.7.8",
     "yargs": "^9.0.1"
   }
 }
