@@ -19,15 +19,5 @@ exports.config = {
     ]
   },
   allScriptsTimeout: 30000,
-  disableChecks: true,
-  onPrepare: function () {
-    // Run whats in the onCleanup here as well? 
-    // Start and end test with a clean node?
-  },
-  onCleanup: function () {
-    shell.exec(`pkill chromedriver`);
-    shell.exec('pkill Google Chrome');
-    // TODO could kill all other browser times as well
-    // Could run cleanup scripts on node
-  }
+  disableChecks: true
 };

@@ -32,9 +32,9 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "chance": "^1.0.10",
-    "cucumber": "^3.0.2",
-    "cucumber-html-reporter": "^3.0.1",
-    "eslint": "^4.7.0",
+    "cucumber": "^3.0.3",
+    "cucumber-html-reporter": "^3.0.4",
+    "eslint": "^4.7.2",
     "eslint-plugin-protractor": "^1.40.0",
     "gherkin-lint": "^2.5.1",
     "glob": "^7.1.2",
@@ -42,7 +42,6 @@
     "page-object-loader": "^1.0.1",
     "protractor": "^5.1.2",
     "protractor-cucumber-framework": "^4.0.8",
-    "shelljs": "^0.7.8",
     "yargs": "^9.0.1"
   }
 }
