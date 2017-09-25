@@ -4,39 +4,49 @@ const fs = require('fs');
 const argv = require('yargs').argv
 
 exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), function (config) {
-  // TODO add ability to set maxSessions
-  config.maxSessions = 3;
+
+  config.maxSessions = setMaxSessions(config);
+
+  /*
+   * Capability to run feature file in parallel
+   * or open and close the browser per feature file
+   */ 
   config.getMultiCapabilities = function () {
     let files;
     let hasTags = hasCucumberTags(config);
 
     if(hasTags) {
-      files = getSpecsWithTags(config);
+      files = getFeaturesWithTags(config);
     } else {
-      files = getSpecFiles();
+      files = getFeatures();
     }
-    console.log('files', files);
-    
+
     return _.map(files, function (file, i) {
       return {
           browserName: 'chrome',
           specs: file,
           shardTestFiles: true,
-          maxInstances: 2 // TODO add dynamic way of setting maxInstances
+          maxInstances: 1
         }
     });
   }
 
-  function getSpecFiles() {
-    // TODO add dynamic way of setting specs
-    // TODO filter out files that do not include tagged scenarios
-    let files = glob.sync('test/features/**/*.feature');
-    return files;
+  /*
+   * Returns all feature files that match pattern
+   */
+  function getFeatures() {
+    let filesGlob = argv.features || 'test/features/**/*.feature';
+    let files = glob.sync(filesGlob);
+    return _.sortedUniq(files);
   }
 
-  function getSpecsWithTags(config) {
+  /*
+   * Filters out specs that dont contain tags
+   * to work better with protractor sharding
+   */
+  function getFeaturesWithTags(config) {
     let cliTags = getCucumberCliTags(config);
-    return _.flatten(_.map(glob.sync('test/features/**/*.feature'), function (file) {
+    return _.flatten(_.map(getFeatures(), function (file) {
       return _.reduce(fs.readFileSync(file, 'utf8').split('\n'), function (memo, line, i) {
         if(line.match(/@/)) {
           let tags = line.split(/(?=@)/g);
@@ -51,8 +61,12 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
     }));
   }
 
+  /*
+   * Gets cucumber tags from the config
+   * or from command line args
+   */
   function getCucumberCliTags(config) {
-    let tags = config.cucumberOpts.tags || process.cucumberOpts.tags;
+    let tags = config.cucumberOpts.tags || argv.cucumberOpts.tags;
 
     let tagArray = tags.split(' ');
     let finalTags = [];
@@ -64,6 +78,10 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
     return finalTags;
   };
 
+  /*
+   * Checks to see if cucumber tags 
+   * exist via command line args or config
+   */
   function hasCucumberTags(config) {
     let hasTags = false;
     if(argv.cucumberOpts) {
@@ -72,5 +90,14 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
       hasTags = !_.isUndefined(config.cucumberOpts.tags);
     }
     return hasTags;
+   };
+
+   /*
+    * Controls how many features run in parallel
+    * The default is the equivalent to restarting a 
+    * browser between tests
+    */
+   function setMaxSessions(config) {
+      return config.maxSessions || argv.maxSessions || 1;
    };
 });
