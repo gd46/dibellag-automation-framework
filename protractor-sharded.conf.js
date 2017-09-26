@@ -21,8 +21,6 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
       files = getFeatures();
     }
 
-    console.log('files', files);
-
     return _.map(files, function (file, i) {
       return {
           browserName: 'chrome',
@@ -85,7 +83,6 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
         finalTags.splice(index+1, 0, possibleTag)
       }
     });
-    console.log('finalTags', finalTags);
     return finalTags;
   };
 
