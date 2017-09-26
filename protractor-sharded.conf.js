@@ -21,6 +21,8 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
       files = getFeatures();
     }
 
+    console.log('files', files);
+
     return _.map(files, function (file, i) {
       return {
           browserName: 'chrome',
@@ -50,9 +52,12 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
       return _.reduce(fs.readFileSync(file, 'utf8').split('\n'), function (memo, line, i) {
         if(line.match(/@/)) {
           let tags = line.split(/(?=@)/g);
-          _.forEach(tags, function (tag) {
-            if(cliTags.includes('not') && tag !== (cliTags[cliTags.indexOf('not') + 1])) {
-              memo.push(file);
+          let parsedTags = _.without(tags, '  ');
+          _.forEach(parsedTags, function (tag) {
+            if(cliTags.includes('not')) {
+              if(tag !== (cliTags[cliTags.indexOf('not') + 1])) {
+                memo.push(file);
+              }
             } else if(cliTags.includes(tag)) {
               memo.push(file);
             }
@@ -80,6 +85,7 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
         finalTags.splice(index+1, 0, possibleTag)
       }
     });
+    console.log('finalTags', finalTags);
     return finalTags;
   };
 
