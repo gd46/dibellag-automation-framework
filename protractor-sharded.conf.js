@@ -51,7 +51,9 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
         if(line.match(/@/)) {
           let tags = line.split(/(?=@)/g);
           _.forEach(tags, function (tag) {
-            if(cliTags.includes(tag)) {
+            if(cliTags.includes('not') && tag !== (cliTags[cliTags.indexOf('not') + 1])) {
+              memo.push(file);
+            } else if(cliTags.includes(tag)) {
               memo.push(file);
             }
           });
@@ -70,9 +72,12 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
 
     let tagArray = tags.split(' ');
     let finalTags = [];
-    _.forEach(tagArray, function (possibleTag) {
+    _.forEach(tagArray, function (possibleTag, index) {
+      possibleTag = possibleTag.replace(/\(/g, '').replace(/\)/g, '');
       if(possibleTag.match(/@/)) {
         finalTags.push(possibleTag);
+      } else if(possibleTag.match(/not/)) {
+        finalTags.splice(index+1, 0, possibleTag)
       }
     });
     return finalTags;
