@@ -125,6 +125,9 @@ Pass the maxSessions flag with the number of feature you want to run in parallel
 5. Add more test examples
 6. Semantic commits / changelog
 7. Cross browser support
+8. Use class syntax
+9. Use a class for configuation
+10. Only create new page object instance if one doesnt already exist
 
 ## FAQ
 
