@@ -3,6 +3,10 @@ A protractor cucumber automation framework built using the latest
 versions of each. The goal is to display an automation framework with working
 examples of how to use these latest packages. 
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
 ## Dependencies
 
 NOTE: This framework maybe usable on lower versions of node and npm. 
@@ -116,6 +120,11 @@ npm run test:shard -- --maxSessions 2
 
 Pass the maxSessions flag with the number of feature you want to run in parallel. 
 
+## Contributing
+
+This project uses [Commitizen](https://github.com/commitizen/cz-cli)
+to enforce [Semantic Releases](https://github.com/semantic-release/semantic-release)
+
 ## TODOs
 
 1. Mock setup
@@ -123,11 +132,10 @@ Pass the maxSessions flag with the number of feature you want to run in parallel
 3. Fuctions for executing requests
 4. Custom reporter
 5. Add more test examples
-6. Semantic commits / changelog
-7. Cross browser support
-8. Use class syntax
-9. Use a class for configuation
-10. Only create new page object instance if one doesnt already exist
+6. Cross browser support
+7. Use class syntax
+8. Use a class for configuation
+9. Only create new page object instance if one doesnt already exist
 
 ## FAQ
 
