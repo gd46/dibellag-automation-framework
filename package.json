@@ -5,7 +5,8 @@
   "main": "protractor.conf.js",
   "scripts": {
     "pretest": "webdriver-manager update && npm run lint",
-    "test": "npm run report:cleanup && protractor protractor.conf.js",
+    "test": "echo 'Going to add tests soon..' && exit 0",
+    "test:e2e": "npm run report:cleanup && protractor protractor.conf.js",
     "test:ci": "protractor protractor.conf.js",
     "test:local": "(npm test; npm run report:generate)",
     "test:shard": "protractor protractor-sharded.conf.js",
