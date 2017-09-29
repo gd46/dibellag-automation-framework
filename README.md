@@ -135,7 +135,6 @@ to enforce [Semantic Releases](https://github.com/semantic-release/semantic-rele
 6. Cross browser support
 7. Use class syntax
 8. Use a class for configuation
-9. Only create new page object instance if one doesnt already exist
 
 ## FAQ
 
