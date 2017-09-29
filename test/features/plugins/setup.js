@@ -1,7 +1,7 @@
 module.exports = {
 	setup: () => {
 		browser.waitForAngularEnabled(false);
-		let pages = require('page-object-loader');
-		browser.pages = pages;
+		let { pageObjectInstances } = require('page-object-loader');
+		browser.pages = pageObjectInstances;
 	}
 };

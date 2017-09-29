@@ -1,6 +1,7 @@
 let { defineSupportCode } = require('cucumber');
 defineSupportCode(function ({ Given, When }) {
-  let examplePage = new browser.pages.Example();
+  
+  let examplePage = browser.pages.Example;
 
   When(/^I go to github$/, function () {
     return browser.get('https://github.com/');
