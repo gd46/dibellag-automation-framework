@@ -2,6 +2,9 @@ const _ = require('lodash');
 const glob = require('glob');
 const fs = require('fs');
 const argv = require('yargs').argv
+const { PickleFilter, getTestCasesFromFilesystem } = require('cucumber');
+const { EventEmitter } = require('events');
+const eventBroadcaster = new EventEmitter();
 
 exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), function (config) {
 
@@ -12,24 +15,19 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
    * or open and close the browser per feature file
    */ 
   config.getMultiCapabilities = function () {
-    let files;
-    let hasTags = hasCucumberTags(config);
-
-    if(hasTags) {
-      files = getFeaturesWithTags(config);
-    } else {
-      files = getFeatures();
-    }
-
-    return _.map(files, function (file, i) {
-      return {
-          browserName: 'chrome',
-          specs: file,
-          shardTestFiles: true,
-          maxInstances: 1
-        }
+    
+    return getFeaturesWithTags(config).then((files) => {
+       return _.map(files, function (file, i) {
+        return {
+            browserName: 'chrome',
+            specs: file,
+            shardTestFiles: true,
+            maxInstances: 1
+          }
+      });
     });
   }
+
 
   /*
    * Returns all feature files that match pattern
@@ -41,64 +39,36 @@ exports.config = _.tap(_.clone(require('./protractor-base.conf.js').config), fun
   }
 
   /*
-   * Filters out specs that dont contain tags
-   * to work better with protractor sharding
+   * Use cucumber built in methods
+   * to filter features based on expression
    */
   function getFeaturesWithTags(config) {
-    let cliTags = getCucumberCliTags(config);
-    return _.flatten(_.map(getFeatures(), function (file) {
-      return _.reduce(fs.readFileSync(file, 'utf8').split('\n'), function (memo, line, i) {
-        if(line.match(/@/)) {
-          let tags = line.split(/(?=@)/g);
-          let parsedTags = _.without(tags, '  ');
-          _.forEach(parsedTags, function (tag) {
-            if(cliTags.includes('not')) {
-              if(tag !== (cliTags[cliTags.indexOf('not') + 1])) {
-                memo.push(file);
-              }
-            } else if(cliTags.includes(tag)) {
-              memo.push(file);
-            }
-          });
-        }
-        return _.sortedUniq(memo);
-      }, []);
-    }));
+    return getTestCasesFromFilesystem({
+      cwd: '',
+      eventBroadcaster: eventBroadcaster,
+      featurePaths: getFeatures(),
+      pickleFilter: new PickleFilter({
+        tagExpression: getCucumberCliTags(config)
+      })
+    }).then(function (results) {
+      let specs = [];
+      _.forEach(results, function (result) {
+        specs.push(result.uri);
+      });
+      return _.sortedUniq(specs);
+    });
   }
 
   /*
    * Gets cucumber tags from the config
-   * or from command line args
+   * or from command line args  or default to
+   * empty expression
    */
   function getCucumberCliTags(config) {
-    let tags = config.cucumberOpts.tags || argv.cucumberOpts.tags;
-
-    let tagArray = tags.split(' ');
-    let finalTags = [];
-    _.forEach(tagArray, function (possibleTag, index) {
-      possibleTag = possibleTag.replace(/\(/g, '').replace(/\)/g, '');
-      if(possibleTag.match(/@/)) {
-        finalTags.push(possibleTag);
-      } else if(possibleTag.match(/not/)) {
-        finalTags.splice(index+1, 0, possibleTag)
-      }
-    });
-    return finalTags;
+    return _.get(config, 'cucumberOpts.tags') || 
+           _.get(argv, 'cucumberOpts.tags')   || 
+          '';
   };
-
-  /*
-   * Checks to see if cucumber tags 
-   * exist via command line args or config
-   */
-  function hasCucumberTags(config) {
-    let hasTags = false;
-    if(argv.cucumberOpts) {
-      hasTags = !_.isUndefined(argv.cucumberOpts.tags);
-    } else {
-      hasTags = !_.isUndefined(config.cucumberOpts.tags);
-    }
-    return hasTags;
-   };
 
    /*
     * Controls how many features run in parallel
