@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const glob = require('glob');
-const fs = require('fs');
 const argv = require('yargs').argv
 const { PickleFilter, getTestCasesFromFilesystem } = require('cucumber');
 const { EventEmitter } = require('events');
