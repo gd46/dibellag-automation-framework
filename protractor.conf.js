@@ -1,30 +1,9 @@
-exports.config = {
-  framework: 'custom',
+let { LocalConfig, CiConfig } = require('./configuration');
 
-  frameworkPath: require.resolve('protractor-cucumber-framework'),
+let ciConfigInstance = new CiConfig();
 
-  specs: [
-    'test/features/**/*.feature'
-  ],
-
-  capabilities: {
-    'browserName': 'chrome'
-  },
-
-  directConnect: true,
-
-  plugins: [{
-    path: './test/features/plugins/setup.js'
-  }],
-
-  cucumberOpts: {
-    timeout: 30000,
-    format: `json:test/output/results-${process.pid}.json`,
-    snippetInterface: 'promise',
-    require: [
-      'test/features/steps/**/*.steps.js'
-    ]
-  },
-  allScriptsTimeout: 30000,
-  disableChecks: true
-};
+if(ciConfigInstance.getSeleniumAddress()) {
+  exports.config = ciConfigInstance;
+} else {
+  exports.config = new LocalConfig();
+}

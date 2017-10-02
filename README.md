@@ -134,7 +134,6 @@ to enforce [Semantic Releases](https://github.com/semantic-release/semantic-rele
 5. Add more test examples
 6. Cross browser support
 7. Use class syntax
-8. Use a class for configuation
 
 ## FAQ
 
