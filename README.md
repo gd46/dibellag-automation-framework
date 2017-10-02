@@ -26,6 +26,40 @@ npm install
 npm test
 ```
 
+## Available npm scripts
+
+| npm script    	| description   | defaults | 
+| ------------- 	|:-------------:| --------:|
+| npm test      	| runs webdriver-manager, report cleanup as pretest, and runs protractor config | 
+| npm run test:ci   | runs tests on grid  | --seleniumAddress=http://127.0.0.1:4444/wd/hub |
+| npm run test:local | runs report cleanup, tests on chrome, and opens report  | --browserName chrome |
+| npm run test:elementExplorer | opens protractors elementExplorer, needs to be run after webdriver-manager has been started in a different tab | 
+| npm run test:dry-run | runs cucumber dry run | --browserName chrome |
+| npm run  test:unit | run framework unit tests | 
+| npm run  test:scripts:parallel | bash example of parallel | 
+| npm run  test:scripts:synchronous | bash example of synchronous |
+| npm run  test:scripts:ignore-failure | bash example that ignore the firs task failure and runs second task | 
+| npm run report:cleanup | deletes and recreates test/output directory | 
+| npm run report:generate | runs and opens local html report | 
+| npm run webdriver-manager:update | updates browser drivers | 
+| npm run webdriver-manager:start | starts local webdriver server, to be run in a separate tab before running elementExplorer command | 
+| npm run webdriver-manager:setup | will update and start webdriver server | 
+| npm run lint | runs gherkin and eslint rules(including protractor) | 
+| npm run lint:fix | fixes the lint rules that are able to be fixed automatically | 
+| npm run lint:gherkin | runs just gherkin lint rules | 
+| npm run lint:es | runs just eslint rules | 
+| npm run commit | runs git cz to help format commits to follow semantic release |
+
+## Available cli flags
+
+| cli flag      | description   | defaults |
+| ------------- |:-------------:| --------:|
+| -p            | runs each feature with a new browser | 
+| --maxSessions | controls how many browsers run at the same time. To be used with -p flag.| 1 |
+| --browserName | which browser to run the tests in, currently supports chrome      | 
+| --cucumberOpts.tags | supports a string tag expression |
+| --features | supports passing in a glob of features to run |
+
 ## Linters
 
 ### Resources
@@ -107,7 +141,7 @@ chmod +x fileName
 Try out the parallel example
 
 ```
-npm run test:shard
+npm test -- -p
 ```
 
 The above default example will run each feature file with a new browser. 
@@ -115,7 +149,7 @@ The above default example will run each feature file with a new browser.
 In order to run multiple features in parallel
 
 ```
-npm run test:shard -- --maxSessions 2
+npm test -- -p --maxSessions 2
 ```
 
 Pass the maxSessions flag with the number of feature you want to run in parallel. 
