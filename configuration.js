@@ -1,5 +1,9 @@
-const argv = require('yargs').argv;
 const _ = require('lodash');
+const glob = require('glob');
+const argv = require('yargs').argv
+const { PickleFilter, getTestCasesFromFilesystem } = require('cucumber');
+const { EventEmitter } = require('events');
+const eventBroadcaster = new EventEmitter();
 
 class BaseConfig {
 	constructor() {
@@ -8,7 +12,6 @@ class BaseConfig {
 		this.plugins = [{
 	    path: './test/features/plugins/setup.js'
 	  }];
-	  this.specs = argv.specs || 'test/features/**/*.feature';
 	  this.allScriptsTimeout = 30000;
 	  this.disableChecks = true;
 	  this.cucumberOpts = {
@@ -19,7 +22,25 @@ class BaseConfig {
 		      'test/features/steps/**/*.steps.js'
 		    ]
 	  };
-	  this.capabilities = this.getBrowserConfig();
+	  if(!argv.p) {
+	  	this.specs = argv.features || 'test/features/**/*.feature';
+	  	this.capabilities = this.getBrowserConfig();
+	  } else {
+	  	this.maxSessions = this.getMaxSessions();
+	  	this.getMultiCapabilities = () => {
+	  		let self = this;
+	  		return this.getFeaturesWithTags().then((files) => {
+		       return _.map(files, function (file, i) {
+		        let config = {
+		        	specs: file,
+		        	shardTestFiles: true,
+		        	maxInstances: 1
+		        };
+		        return _.merge(config, self.getBrowserConfig());
+		      });
+		    });
+	  	};
+	  }
 	}
 
 	getCucumberFormat() {
@@ -39,6 +60,44 @@ class BaseConfig {
 		}
 		return browserConfig[argv.browserName];
 	}
+
+	/*
+   * Returns all feature files that match pattern
+   */
+  getFeatures() {
+    let filesGlob = argv.features || 'test/features/**/*.feature';
+    let files = glob.sync(filesGlob);
+    return _.sortedUniq(files);
+  }
+
+  /*
+   * Use cucumber built in methods
+   * to filter features based on expression
+   */
+  getFeaturesWithTags() {
+    return getTestCasesFromFilesystem({
+      cwd: '',
+      eventBroadcaster: eventBroadcaster,
+      featurePaths: this.getFeatures(),
+      pickleFilter: new PickleFilter({
+        tagExpression: this.getCucumberCliTags()
+      })
+    }).then(function (results) {
+      let specs = [];
+      _.forEach(results, function (result) {
+        specs.push(result.uri);
+      });
+      return _.sortedUniq(specs);
+    });
+  }
+
+  getCucumberCliTags() {
+    return _.get(argv, 'cucumberOpts.tags') || '';
+  }
+
+  getMaxSessions() {
+    return argv.maxSessions || 1;
+  }
 }
 
 class LocalConfig extends BaseConfig {
