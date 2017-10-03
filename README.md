@@ -171,12 +171,11 @@ to enforce [Semantic Releases](https://github.com/semantic-release/semantic-rele
 ## TODOs
 
 1. Mock setup
-2. Travis ci/headless chrome cucumber tests
-3. Fuctions for executing requests
-4. Custom reporter
-5. Add more test examples
-6. Cross browser support
-7. Use class syntax
+2. Fuctions for executing requests
+3. Custom reporter
+4. Add more test examples
+5. Cross browser support
+6. Use class syntax
 
 ## FAQ
 
