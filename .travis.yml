@@ -16,8 +16,6 @@ before_install:
   - npm i -g npm@^5.0.0  
 before_script:
   - npm prune
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 script: 
  - npm run test:unit 
  - npm run webdriver-manager:update
