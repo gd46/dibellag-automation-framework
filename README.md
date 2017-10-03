@@ -15,7 +15,16 @@ However, these are the versions this project was built and test with.
 ```
 npm  ->  5.3.0
 node ->  v8.4.0
+java -> 8
 ```
+## Supported Browsers
+
+| Browser | Description | Direct Connect | 
+| ------- |:-----------:| --------------:|
+| Chrome  | Works with most latest versions | Yes |
+| Chrome Headless | Latest couple versions  | Yes |
+| Firefox | Currently having issues, opens browser but connection is denied. Also needs latest version. | Yes |
+| Safari | Needs latest version. Setup required: It can be turned on by opening Safari preferences (Safari > Preferences in the menu bar), going to the Advanced tab, and ensuring that the Show Develop menu in menu bar checkbox is checked. Enable Remote Automation in the Develop menu. This is toggled via Develop > Allow Remote Automation in the menu bar. | No |
 
 ## Try it now
 
@@ -56,7 +65,7 @@ npm test
 | ------------- |:-------------:| --------:|
 | -p            | runs each feature with a new browser | 
 | --maxSessions | controls how many browsers run at the same time. To be used with -p flag.| 1 |
-| --browserName | which browser to run the tests in, currently supports chrome      | 
+| --browserName | which browser to run the tests in, currently supports (chrome, chrome-headless, firefox, safari)      | 
 | --cucumberOpts.tags | supports a string tag expression |
 | --features | supports passing in a glob of features to run |
 

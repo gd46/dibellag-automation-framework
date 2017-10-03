@@ -56,6 +56,19 @@ class BaseConfig {
 		let browserConfig = {
 		 	'chrome': {
 		 		'browserName': 'chrome'
+		 	},
+		 	'chrome-headless': {
+		 		'browserName': 'chrome',
+		 		'chromeOptions': {
+			     'args': [ "--headless", "--disable-gpu", "--window-size=1300x1000" ]
+			   }
+		 	},
+		 	'firefox': {
+		 		'browserName': 'firefox',
+		 		'marionette': true
+		 	},
+		 	'safari': {
+		 		'browserName': 'safari'
 		 	}
 		}
 		return browserConfig[argv.browserName];
@@ -103,7 +116,7 @@ class BaseConfig {
 class LocalConfig extends BaseConfig {
 	constructor() {
 		super();
-		if (argv.browserName === 'chrome') {
+		if (!argv.browserName === 'safari') {
 			this.directConnect = true;
 		}
 	}
