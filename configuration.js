@@ -31,6 +31,7 @@ class BaseConfig {
 	  		let self = this;
 	  		return this.getFeaturesWithTags().then((files) => {
 		       return _.map(files, function (file, i) {
+		       	console.log('file', file);
 		        let config = {
 		        	specs: file,
 		        	shardTestFiles: true,
@@ -96,11 +97,18 @@ class BaseConfig {
         tagExpression: this.getCucumberCliTags()
       })
     }).then(function (results) {
+    	console.log('results', JSON.stringify(results));
       let specs = [];
       _.forEach(results, function (result) {
-        specs.push(result.uri);
+      	let lineNumber = result.pickle.locations[0].line;
+      	let uri = result.uri;
+      	let spec = `${uri}:${lineNumber}`;
+      	console.log('spec', spec);
+      	specs.push(spec);
+        // specs.push(result.uri);
       });
-      return _.sortedUniq(specs);
+      return specs;
+      // return _.sortedUniq(specs);
     });
   }
 
