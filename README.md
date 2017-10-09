@@ -39,9 +39,8 @@ npm test
 
 | npm script    	| description   | defaults | 
 | ------------- 	|:-------------:| --------:|
-| npm test      	| runs webdriver-manager, report cleanup as pretest, and runs protractor config | 
+| npm test      	| runs report cleanup as pretest, and runs protractor config | 
 | npm run test:ci   | runs tests on grid  | --seleniumAddress=http://127.0.0.1:4444/wd/hub |
-| npm run test:local | runs report cleanup, tests on chrome, and opens report  | --browserName chrome |
 | npm run test:elementExplorer | opens protractors elementExplorer, needs to be run after webdriver-manager has been started in a different tab | 
 | npm run test:dry-run | runs cucumber dry run | --browserName chrome |
 | npm run  test:unit | run framework unit tests | 
