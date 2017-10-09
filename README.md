@@ -172,9 +172,8 @@ to enforce [Semantic Releases](https://github.com/semantic-release/semantic-rele
 1. Mock setup
 2. Fuctions for executing requests
 3. Custom reporter
-4. Add more test examples
-5. Cross browser support
-6. Use class syntax
+4. Cross browser support
+5. How to best handle non-angular websites
 
 ## FAQ
 
