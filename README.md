@@ -174,6 +174,12 @@ to enforce [Semantic Releases](https://github.com/semantic-release/semantic-rele
 3. Custom reporter
 4. Cross browser support
 5. How to best handle non-angular websites
+6. Create test app to provide examples for the following test cases: 	
+	6.1. Angular app
+	6.2. Non Angular page
+	6.3. Modals
+	6.4. Iframes
+	6.5. New tabs
 
 ## FAQ
 
