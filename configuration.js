@@ -22,14 +22,17 @@ class BaseConfig {
 		      'test/features/steps/**/*.steps.js'
 		    ]
 	  };
-	  if(!argv.p) {
-	  	this.specs = argv.features || 'test/features/**/*.feature';
-	  	this.capabilities = this.getBrowserConfig();
-	  } else {
+	 	if (argv.parallelFeatures || argv.parallelScenarios) {
 	  	this.maxSessions = this.getMaxSessions();
 	  	this.getMultiCapabilities = () => {
 	  		let self = this;
-	  		return this.getFeaturesWithTags().then((files) => {
+	  		return this.getFeaturesByTagExpression().then((results) => {
+	  			let files;
+	  			if(argv.parallelFeatures) {
+	  				files = results.features;
+	  			} else {
+	  				files = results.scenarios;
+	  			}
 		       return _.map(files, function (file, i) {
 		        let config = {
 		        	specs: file,
@@ -40,15 +43,18 @@ class BaseConfig {
 		      });
 		    });
 	  	};
+	  } else {
+	  	this.specs = argv.features || 'test/features/**/*.feature';
+	  	this.capabilities = this.getBrowserConfig();
 	  }
 	}
 
 	getCucumberFormat() {
 		// shardTestFiles already adds process id
-		if(!argv.p) { 
-			return `json:test/output/results-${process.pid}.json`;
-		} else {
+		if(argv.parallelFeatures || argv.parallelScenarios) { 
 			return 'json:test/output/results.json';
+		} else {
+			return `json:test/output/results-${process.pid}.json`;
 		}
 	}
 
@@ -87,7 +93,7 @@ class BaseConfig {
    * Use cucumber built in methods
    * to filter features based on expression
    */
-  getFeaturesWithTags() {
+  getFeaturesByTagExpression() {
     return getTestCasesFromFilesystem({
       cwd: '',
       eventBroadcaster: eventBroadcaster,
@@ -96,11 +102,23 @@ class BaseConfig {
         tagExpression: this.getCucumberCliTags()
       })
     }).then(function (results) {
-      let specs = [];
+      let features = [];
+      let scenarios = [];
       _.forEach(results, function (result) {
-        specs.push(result.uri);
+      	if(argv.parallelFeatures) {
+      		features.push(result.uri);
+      	} else {
+      		let lineNumber = result.pickle.locations[0].line;
+      		let uri = result.uri;
+      		let scenario = `${uri}:${lineNumber}`;
+      		scenarios.push(scenario);
+      	}
       });
-      return _.sortedUniq(specs);
+
+      return {
+      	features: _.sortedUniq(features),
+      	scenarios: scenarios
+      }
     });
   }
 

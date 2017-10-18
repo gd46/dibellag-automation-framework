@@ -62,7 +62,8 @@ npm test
 
 | cli flag      | description   | defaults |
 | ------------- |:-------------:| --------:|
-| -p            | runs each feature with a new browser | 
+| --parallel-features            | runs each feature with a new browser | 
+| --parallel-scenarios | runs each scenarios with a new browser | 
 | --maxSessions | controls how many browsers run at the same time. To be used with -p flag.| 1 |
 | --browserName | which browser to run the tests in, currently supports (chrome, chrome-headless, firefox, safari)      | 
 | --cucumberOpts.tags | supports a string tag expression |
@@ -146,21 +147,32 @@ chmod +x fileName
 
 ## Running tests in parallel
 
-Try out the parallel example
+In order to run each feature file with a new browser 
 
 ```
-npm test -- -p
+npm test -- --parallel-features --browserName chrome
 ```
-
-The above default example will run each feature file with a new browser. 
 
 In order to run multiple features in parallel
 
 ```
-npm test -- -p --maxSessions 2
+npm test -- --parallel-features --browserName chrome --maxSessions 2
 ```
 
-Pass the maxSessions flag with the number of feature you want to run in parallel. 
+In order to run each scenario in a new brower
+
+```
+npm test -- --parallel-scenarios --browserName chrome
+```
+
+In order to run each scenario in parallel
+
+```
+npm test -- --parallel-scenarios --browserName chome --maxSessions 2
+```
+
+
+Pass the maxSessions flag with the number of features/scenarios you want to run in parallel. 
 
 ## Contributing
 
