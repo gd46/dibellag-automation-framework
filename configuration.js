@@ -20,7 +20,8 @@ class BaseConfig {
 		    format: this.getCucumberFormat(),
 		    snippetInterface: 'promise',
 		    require: [
-		      'test/features/steps/**/*.steps.js'
+		      'test/features/**/step_definitions/**/*.steps.js',
+		      'test/features/support/**/*.js'
 		    ]
 	  };
 	 	if (argv.parallelFeatures || argv.parallelScenarios) {
