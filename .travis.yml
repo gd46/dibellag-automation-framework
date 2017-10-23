@@ -19,7 +19,7 @@ before_script:
 script: 
  - npm run test:unit 
  - npm run webdriver-manager:update
- - npm run test:local -- --browserName chrome-headless 
+ - npm run test -- --browserName chrome-headless 
 after_success:
   - npm run semantic-release
 branches:
