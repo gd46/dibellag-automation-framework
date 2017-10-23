@@ -67,7 +67,7 @@ npm test
 | --parallel-scenarios | runs each scenarios with a new browser | 
 | --maxSessions | controls how many browsers run at the same time. To be used with -p flag.| 1 |
 | --browserName | which browser to run the tests in, currently supports (chrome, chrome-headless, firefox, safari)      | 
-| --cucumberOpts.tags | supports a string tag expression |
+| --cucumberOpts.tags | supports a string [tag expression](https://github.com/cucumber/cucumber/tree/master/tag-expressions) |
 | --features | supports passing in a glob of features to run |
 
 ## Linters
@@ -172,8 +172,21 @@ In order to run each scenario in parallel
 npm test -- --parallel-scenarios --browserName chome --maxSessions 2
 ```
 
-
 Pass the maxSessions flag with the number of features/scenarios you want to run in parallel. 
+
+## Running test by tag
+
+```
+npm test -- --browserName chrome --cucumberOpts.tags "@tag_expression"
+```
+
+## Running test by tag expression
+
+```
+npm test -- --browserName chrome --cucumberOpts.tags "(@tag1 and @tag2) and not @wip"
+```
+
+See [cucumber tag expressions](https://github.com/cucumber/cucumber/tree/master/tag-expressions) for more examples
 
 ## Contributing
 
