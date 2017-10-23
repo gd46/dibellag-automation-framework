@@ -24,7 +24,7 @@ java -> 8
 | ------- |:-----------:| --------------:|
 | Chrome  | Works with most latest versions | Yes |
 | Chrome Headless | Latest couple versions  | Yes |
-| Firefox | Currently having issues, opens browser but connection is denied. Also needs latest version. | Yes |
+| Firefox | 56+ | Yes |
 | Safari | Needs latest version. Setup required: It can be turned on by opening Safari preferences (Safari > Preferences in the menu bar), going to the Advanced tab, and ensuring that the Show Develop menu in menu bar checkbox is checked. Enable Remote Automation in the Develop menu. This is toggled via Develop > Allow Remote Automation in the menu bar. | No |
 
 ## Try it now

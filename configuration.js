@@ -14,6 +14,7 @@ class BaseConfig {
 	  }];
 	  this.allScriptsTimeout = 30000;
 	  this.disableChecks = true;
+	  this.ignoreUncaughtExceptions = true;
 	  this.cucumberOpts = {
 		    timeout: 30000,
 		    format: this.getCucumberFormat(),
@@ -71,7 +72,9 @@ class BaseConfig {
 		 	},
 		 	'firefox': {
 		 		'browserName': 'firefox',
-		 		'marionette': true
+		 		'marionette': true,
+		 		'acceptInsecureCerts': true,
+		 		'acceptSslCerts': true
 		 	},
 		 	'safari': {
 		 		'browserName': 'safari'
