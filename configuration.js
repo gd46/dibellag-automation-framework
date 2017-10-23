@@ -134,7 +134,7 @@ class BaseConfig {
 class LocalConfig extends BaseConfig {
 	constructor() {
 		super();
-		if (!argv.browserName === 'safari') {
+		if (argv.browserName !== 'safari') {
 			this.directConnect = true;
 		}
 	}
