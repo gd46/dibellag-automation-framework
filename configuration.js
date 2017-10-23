@@ -10,7 +10,7 @@ class BaseConfig {
 		this.framework = 'custom';
 		this.frameworkPath = require.resolve('protractor-cucumber-framework');
 		this.plugins = [{
-	    path: './test/features/plugins/setup.js'
+	    path: './test/plugins/setup.js'
 	  }];
 	  this.allScriptsTimeout = 30000;
 	  this.disableChecks = true;
