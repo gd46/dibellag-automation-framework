@@ -38,7 +38,7 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "chance": "^1.0.12",
-    "cucumber": "^4.2.1",
+    "cucumber": "4.1.0",
     "cucumber-html-reporter": "^4.0.3",
     "eslint": "^5.1.0",
     "eslint-plugin-protractor": "^1.40.0",
