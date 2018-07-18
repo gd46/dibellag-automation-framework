@@ -1,6 +1,6 @@
-let { defineSupportCode } = require('cucumber');
+let { setWorldConstructor, setDefaultTimeout } = require('cucumber');
 /**
- * CustomWorld 
+ * CustomWorld
  * maintains default behavior
  * adds chai expect and setup chai as promised
  * sets up default step and hook timeout
@@ -16,7 +16,5 @@ function CustomWorld ({ attach, parameters }) {
 	chai.use(chaiAsPromised);
 }
 
-defineSupportCode(function ({ setWorldConstructor, setDefaultTimeout }) {
-  setWorldConstructor(CustomWorld);
-  setDefaultTimeout(60 * 1000);
-});
+setWorldConstructor(CustomWorld);
+setDefaultTimeout(60 * 1000);
