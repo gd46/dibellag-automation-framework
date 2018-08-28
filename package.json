@@ -15,13 +15,13 @@
     "test:scripts:ignore-failure": "./test/scripts/ignore-failure.sh",
     "report:cleanup": "rm -rf test/output && mkdir test/output",
     "report:generate": "node ./test/lib/reporter.config.js",
-    "webdriver-manager:update": "webdriver-manager update",
+    "webdriver-manager:update": "webdriver-manager update --versions.chrome 2.34 --gecko=false",
     "webdriver-manager:start": "webdriver-manager start",
     "webdriver-manager:setup": "webdriver-manager update && webdriver-manager start",
     "lint": "(npm run lint:gherkin; npm run lint:es)",
-    "lint:fix": "eslint test/** --fix",
+    "lint:fix": "eslint **/*.js --fix",
     "lint:gherkin": "gherkin-lint",
-    "lint:es": "eslint test/**",
+    "lint:es": "eslint **/*.js",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "git cz"
@@ -38,9 +38,9 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "chance": "^1.0.12",
-    "cucumber": "^3.0.5",
-    "cucumber-html-reporter": "^3.0.4",
-    "eslint": "^4.10.0",
+    "cucumber": "4.1.0",
+    "cucumber-html-reporter": "^4.0.3",
+    "eslint": "^5.1.0",
     "eslint-plugin-protractor": "^1.40.0",
     "gherkin-lint": "^2.6.0",
     "glob": "^7.1.2",
@@ -48,8 +48,8 @@
     "page-object-loader": "^1.1.0",
     "pre-commit": "^1.2.2",
     "protractor": "^5.2.0",
-    "protractor-cucumber-framework": "^4.1.1",
-    "yargs": "^9.0.1"
+    "protractor-cucumber-framework": "^6.0.0",
+    "yargs": "^12.0.1"
   },
   "repository": {
     "type": "git",
@@ -58,11 +58,11 @@
   "devDependencies": {
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
-    "semantic-release": "^8.2.3"
+    "semantic-release": "^15.8.0"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "cz-conventional-changelog"
     }
   }
 }

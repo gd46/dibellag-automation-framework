@@ -160,7 +160,7 @@ In order to run multiple features in parallel
 npm test -- --parallel-features --browserName chrome --maxSessions 2
 ```
 
-In order to run each scenario in a new brower
+In order to run each scenario in a new browser
 
 ```
 npm test -- --parallel-scenarios --browserName chrome

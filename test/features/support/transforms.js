@@ -1,10 +1,8 @@
-let { defineSupportCode } = require('cucumber');
+let { defineParameterType } = require('cucumber');
 let Promise = require('bluebird');
 
-defineSupportCode(({ defineParameterType }) => {
-	defineParameterType({
-		regexp    		: /belly/,
-		transformer	: (s) => Promise.resolve(s.toUpperCase()),
-		name    				: 'belly'
-	});
+defineParameterType({
+  regexp      : /belly/,
+  transformer : (s) => Promise.resolve(s.toUpperCase()),
+  name        : 'belly'
 });
