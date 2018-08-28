@@ -68,7 +68,7 @@ class BaseConfig {
       'chrome-headless': {
         'browserName': 'chrome',
         'chromeOptions': {
-          'args': ['--headless', '--disable-gpu', '--window-size=1300,1000']
+          'args': ['--headless', '--disable-gpu', '--no-sandbox', '--window-size=1300,1000']
         }
       },
       'firefox': {
