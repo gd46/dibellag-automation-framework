@@ -15,7 +15,7 @@
     "test:scripts:ignore-failure": "./test/scripts/ignore-failure.sh",
     "report:cleanup": "rm -rf test/output && mkdir test/output",
     "report:generate": "node ./test/lib/reporter.config.js",
-    "webdriver-manager:update": "webdriver-manager update --versions.chrome 2.37 --gecko=false",
+    "webdriver-manager:update": "webdriver-manager update --versions.chrome 2.34 --gecko=false",
     "webdriver-manager:start": "webdriver-manager start",
     "webdriver-manager:setup": "webdriver-manager update && webdriver-manager start",
     "lint": "(npm run lint:gherkin; npm run lint:es)",
