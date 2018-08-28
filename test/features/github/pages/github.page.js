@@ -10,7 +10,7 @@ class Github {
 	 * @constructor
 	 */
 	constructor () {
-		this.headerLogo = $('.header-logo-invertocat');
+		this.headerLogo = $('.octicon-mark-github');
 	}
 }
 
